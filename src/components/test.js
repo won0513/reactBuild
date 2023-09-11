@@ -34,6 +34,7 @@ function Nav({name_list, total, num, p}) {
     const [page, setPage] = useState(p);
     console.log('현재 페이지', page)
     let last_num = page*10;
+    
     if (total < last_num) {
       last_num =  total;
     }

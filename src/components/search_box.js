@@ -1,12 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-
+import {useNavigate } from "react-router-dom";
 
 
 function Search_box({opt, q}) {
     const [query, setQuery] = useState("");
     let [option, setOption] = useState("");
-    
     useEffect(() => 
     {
       setOption(opt)
@@ -32,8 +31,10 @@ function Search_box({opt, q}) {
       console.log('new option', option)
       query === 'undefined' && (setQuery(q))  
     });*/
+    const navigate = useNavigate();
+
     const onSubmit = async () => {
-      option === '' ? (window.location.href = "/search/" + query + "/" + opt) : (
+      option === '' ?(window.location.href = "/search/" + query + "/" + opt ) : (
         window.location.href = "/search/" + query + "/" + option 
       )
     };

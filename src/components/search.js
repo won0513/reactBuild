@@ -17,7 +17,7 @@ function Search() {
     async function fetchData() {
       const result = await axios.get(
         "/search?query=" + query + "&option=" + option
-      );
+      );  
        console.log(result.data);
        setSearchData(result.data);
     }

@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import Pagination from "react-js-pagination";
 
 function Search_conts({list, word, total, kind, option}) {
-        let [curList, setCurList] = useState([]);
-        const [page, setPage] = useState(1);
+    let [curList, setCurList] = useState([]);
+    const [page, setPage] = useState(1);
     const Paging = () => {
         const handlePageChange = (page) => {
           setPage(page);
@@ -89,9 +89,6 @@ function Search_conts({list, word, total, kind, option}) {
         )
     })*/
 
-    const onSubmit = async () => {
-        window.location.href = "/search/" + kind + "/" + word + "/" + option 
-    };
     return (
         <div class="div2">
             <ul>

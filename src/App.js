@@ -3,44 +3,30 @@ import './App.css';
 import { useState, useEffect } from 'react';
 
 
+import React from 'react';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import Home from './components/home.js';
+import Search from './components/search.js';
+import Recommand from './components/recommand';
+import Article_category from './components/article_category';
+import Login from './components/login';
+import Search_detail from './components/search_detail';
+
 function App() {
-  // state
-  const [data, setData] = useState({})
-
-  console.log('실행')
-  useEffect(() => 
-    {
-    	fetch("/users", {headers: {
-        Accept: "application / json",
-      },}).then(
-          console.log("접속")
-        ).then(
-          response => response.json()
-        ).then(
-          data => {
-            // 받아온 데이터를 data 변수에 update
-            setData(data);
-          }
-        ).catch(
-          (err) => console.log(err)
-        )
-    }, [])
   return (
-    <div className='App'>
-      <h1>test 하는 중..</h1>
-      <div>
-        {/* 삼항연산자 */}
-        { (typeof data.id === 'undefined') ? (
-          // fetch가 완료되지 않았을 경우에 대한 처리
-          <p>loding...</p>,
-          <p> n </p>
-        ) : (
-          <p>{data.name}</p>
-        )}
-      </div>
+    <div className="App">
+				<Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path= {"search/:query/:option"} element={<Search />} />
+          <Route path={'recommand'} element={<Recommand/>} />
+          <Route path={'category/:kind/:c1/:c2'} element={<Article_category/>} />
+          <Route path={'/login'} element={<Login/>} />
+          <Route path={'serch/:kind/:query/:option/:page'} element={<Search_detail/>} />
+				</Routes>
     </div>
-  )
+  );
 }
-
 
 export default App;
