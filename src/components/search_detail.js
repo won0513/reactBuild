@@ -17,7 +17,7 @@ function Search_detail() {
   useEffect(() => {
     async function fetchData() {
       const result = await axios.get(
-        "/search/" + kind + "/" + query
+        "/search/" + kind + "?" + query
       );
        console.log(result.data);
        setSearchData(result.data);

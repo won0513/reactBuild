@@ -46,7 +46,7 @@ function Search_box({opt, q}) {
     const optList = ['통합검색', '민법', '판례'];
     return (
      <div>
-      <select name="option" id="option" onChange={onOptChange}>
+      <select name="option" id="option" onChange={onOptChange} style={{border: 'solid #e6c619', borderWidth: '2px 0 2px 2px' }}>
       {optList.map((o, idx) => {
         return(  
           String(idx+1) === String(opt) ? (
@@ -59,23 +59,21 @@ function Search_box({opt, q}) {
       </select>
       {
         q === 'undefined' ? (
-          <input id="query" type="text" placeholder="검색어를 입력해 주세요"
+          <input id="query" type="text" placeholder="검색어를 입력해 주세요" style={{border: 'solid #e6c619', borderWidth: '2px 0 2px 2px' }}
       onChange={(e) => {
       setQuery(e.target.value);
-      console.log(query);
       }}></input>
         ) : (
-          <input id="query" type="text"
+          <input id="query" type="text" style={{border: '2px solid #e6c619', borderWidth: '2px 0 2px 2px'}}
       onChange={(e) => {
       setQuery(e.target.value);
-      console.log('q있음', query);
       }} value={query}></input>
         )
       }
-      
   
       <button id="icon"
        type="button"
+       style={{color:'#e6c619', backgroundColor:'white', border: '2px solid #e6c619'}}
        onClick={() => {
        onSubmit();
        }}><i className="bi bi-search"></i></button>

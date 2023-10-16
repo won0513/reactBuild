@@ -5,20 +5,55 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+
+import LoadingModal from '../elements/LoadingModal.js';
+
+function TabContent({tabName, tabContList, c}){
+  return <Nav className="me-auto">{  
+          tabContList.slice(0, 3).map((c, idx)=>{
+            console.log(c)
+            return (<Nav.Link onClick={()=>{ 
+                      let url = ''
+                      tabName === '민법' ? (url = "/category/article" + "/" + '총칙' + "/" + idx) :
+                      (url = "/category/precedent" + "/" + '총칙' + "/" + c)
+                    }}>
+                    
+                    {tabName ==='민법' ? (
+                      <p style={{fontSize:'12px'}}>
+                        <p>{c[0]}</p>
+                        {c[1].map((s)=> <span>{s}</span>)}
+                      </p>
+                    ) : (<span  className="fontFt">{c[1]}</span>)}</Nav.Link>)})
+      }
+      </Nav>
+}
+
+
 
 
 function Home () {
   
-  const [option, setOption] = useState("");
-  const [loginData, setLoginData] = useState("");
-  console.log("home, option:", option)
+  let [option, setOption] = useState("1");
+  let [loginData, setLoginData] = useState("");
+  let [kind, setKind] = useState("민법");
+  const c = "총칙";
+  let [getData, setGetData] = useState([]);
+
+
   useEffect(() => 
   {
-    setOption("1")
-    console.log("home, option:", option)
     axios.get('/checkLogin').then((res) => setLoginData(res.data))
-    console.log(loginData)
-  }, [])
+    async function fetchData() {
+      
+      const result = await axios.get(
+        "/homeContents/" + c
+      );
+      console.log(result.data);
+      setGetData(result.data);
+    }
+    fetchData()
+  }, [c])
   const handleClick = (e) => {
     // submit을 할 때 페이지 자체가 새로고침이 되는 것을 막음
     //e.preventDefault();
@@ -27,6 +62,37 @@ function Home () {
     axios.get('/logout'
     ).then((res) => console.log(res)).then(window.location.href = ('/'));
   };
+
+  
+function Tab({kind, c}) {
+  const tabList = ['민법', '판례'];
+  return (
+  <div><Nav className="mt-5 mb-3" variant="tabs" defaultActiveKey={kind}>
+      {tabList.map((t, idx)=> {
+          console.log(t)
+          let k = t;
+          return (    
+          <Nav.Item>
+          <Nav.Link eventKey={k} onClick={()=>{setKind(t);}}><span  className="fontFt">{t}</span></Nav.Link>
+          </Nav.Item>
+          )
+      }
+      )}
+  </Nav>
+  <Navbar bg="light" expand="xxl">
+  <Container>
+  <Navbar.Brand href="#home"><span className="fontTw" style={{color:'rgb(170, 160, 0)'}}>{kind}</span></Navbar.Brand>
+  <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+    <Navbar.Collapse id="basic-navbar-nav">
+    
+    {(kind === '민법') ? (<TabContent tabContList={getData.article} c={c} tabName={kind}/>) : (
+              <TabContent tabContList={getData.precedent} c={c} tabName={kind}/>
+            )}
+  </Navbar.Collapse></Container></Navbar>
+  </div>
+  
+)
+}
 
   console.log("home, option:", option)
     return(
@@ -48,9 +114,31 @@ function Home () {
         <nav id="nav">&nbsp;</nav>
         <div id="section">
           <Search_box opt={option}/>
+          <div className="homeBlock1">
+          {(typeof getData.precedent === 'undefined') ? (
+          // fetch가 완료되지 않았을 경우에 대한 처리
+          <p>
+            <LoadingModal/>
+            
+            </p>
+          ) : ((typeof getData.article === 'undefined') || (
+            <Tab c={c} kind={kind}/>))}
+          </div>
+          <div>
+            <Link to='/introduce'>
+            <p className="homeBlock2" style={{marginRight:100, marginTop:50}}>
+                서비스 소개 바로가기
+            </p>
+            </Link>
+            <Link to='/example'>
+            <p className="homeBlock2" style={{marginTop:50}}>
+                사용 방법
+            </p>
+            </Link>
+          </div>
         </div>
         <aside id="aside">&nbsp;</aside>
-        <footer></footer>
+        <footer style={{backgroundColor:'#EEEEEE'}}>관련 사이트 | 최공</footer>
       </div>
     )
 }

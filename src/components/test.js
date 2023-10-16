@@ -77,9 +77,9 @@ function Nav({name_list, total, num, p}) {
             {curList.map((n) => {
             return (
                 <li>{n[0] === num ? (
-                <Link  style={{ textDecoration: "none" }} id ="active-li">{ n[1] }</Link>
+                <Link  style={{ textDecoration: "none" , color:'black', fontWeight: 'bold'}} id ="active-li">{ n[1] }</Link>
             ) : (
-            <Link  style={{ textDecoration: "none" }} onClick={() => window.location.href = '/precedent/detail/' + n[0] + '/' + page}>{ n[1] }</Link>
+            <Link  style={{ textDecoration: "none" , color:'black', fontWeight: 'lighter'}} onClick={() => window.location.href = '/precedent/detail/' + n[0] + '/' + page}>{ n[1] }</Link>
                 
             )}</li>
             )
@@ -111,7 +111,8 @@ function Test() {
       <Menubar/>
       <p id="login">&nbsp;</p>
       </header>
-    <nav id="nav">
+    <nav id='nav'>&nbsp;</nav>
+    <nav className="fixed">
     {typeof searchData.p_dic === 'undefined' ? (
         <p> </p>
         ) : (

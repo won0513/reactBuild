@@ -59,11 +59,17 @@ import Test from './components/test.js'
 import Recommand from './components/recommand.js';
 import Login from './components/login';
 import Signup from './components/signup';
+import Ex from './components/ex.js';
+import Introduce from './components/introduce';
+import Example from './components/example';
 function App() {
   return (
     <div className="App">
 				<Routes>
           <Route path="/" element={<Home/>}/>
+          <Route path="/ex" element={<Ex/>}/>
+          <Route path="/introduce" element={<Introduce/>}/>
+          <Route path="/Example" element={<Example/>}/>
           <Route path="/search/:query/:option" element={<Search/>}/>
           <Route path="/search/:kind/:query/:option" element={<Search_detail/>}/>
           <Route path="/tab" element={<Tab/>}/>

@@ -91,11 +91,12 @@ function Table({list, total, kind, isLoggedIn, lawBookmark}) {
           )}*/
         };
         return (
-          <div>
-          <Pagination
+          <div style={{position:'absolute', left:'50%', marginLeft:'-70px'}}>
+          <Pagination 
+            style={{display:'block'}}
             activePage={page} // 현재 페이지
-            itemsCountPerPage={10} // 한 페이지랑 보여줄 아이템 갯수
-            totalItemsCount={total} // 총 아이템 갯수
+            itemsCountPerPage={10} // 한 페이지랑 보여줄 아이템 개수
+            totalItemsCount={total} // 총 아이템 개수
             pageRangeDisplayed={5} // paginator의 페이지 범위
             prevPageText={"‹"} // "이전"을 나타낼 텍스트
             nextPageText={"›"} // "다음"을 나타낼 텍스트
@@ -115,7 +116,7 @@ function Table({list, total, kind, isLoggedIn, lawBookmark}) {
               let url = "/precedent/detail/" + string[1] + '/' + page
                 return(    
                     <tr>
-                        <td className="widthTh">{kind==='article'? (<span>{(page-1)*10+idx+1}</span>) : ( <span>{string[1]}</span>)}</td>
+                        <td className="widthTh"><span>{(page-1)*10+idx+1}</span></td>
                         <td>
                           {kind==='article' ? (
                           <details>
@@ -123,7 +124,7 @@ function Table({list, total, kind, isLoggedIn, lawBookmark}) {
                           <br/>
                           <p>
                           {string[1].map((str)=> { console.log(str); return <p>{str}</p>})}</p></details>) : (
-                            <span><Link to={url}  style={{ textDecoration: "none" }}>{string[2]}</Link></span>
+                            <span><Link to={url}  style={{ textDecoration: "none" , color:'black'}}>{string[2]}</Link></span>
                           )}
                           
                         </td>

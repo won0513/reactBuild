@@ -39,7 +39,7 @@ function Search() {
       // fetch가 완료되지 않았을 경우에 대한 처리
       <p>loding...</p>
       ) : (
-      <div id="div">
+      <div id="div" style={{border:'0.1px solid', borderColor: '#DDDDDD', padding: '20px', marginTop:'30px'}}>
         {String(option) !== "3"  && (
           <div>
           <Search_title name="민법 내용" num={searchData.a_dic.total}/>

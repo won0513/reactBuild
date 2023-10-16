@@ -47,9 +47,9 @@ function Search_conts({list, word, total, kind, option}) {
       }, [])
     console.log(curList)
     const btnList = {
-        alist: <p>{total > 3 && (<button type="button" onClick={() => {
+        alist: <p>{total > 3 && (<button className='moreBtn' type="button" onClick={() => {
             window.location.href = "/search/" + "article" + "/" + word + "/" + option;}}>더보기</button>)}</p>,
-        plist: <p>{total > 3 && (<button type="button" onClick={() => {
+        plist: <p>{total > 3 && (<button className='moreBtn' type="button" onClick={() => {
             window.location.href = "/search/" + "precedent" + "/" + word + "/" + option;}}>더보기</button>)}</p>,
         article: <p>
         <div>
@@ -103,9 +103,9 @@ function Search_conts({list, word, total, kind, option}) {
                         str.map((s) => {
                             return(
                                 s === word ? (
-                                    <span class = "div2-title bold">{ s }</span>
+                                    <span class = "div2-title bold fontFt">{ s }</span>
                                 ) : (
-                                    <span class = "div2-title">{ s }</span>
+                                    <span class = "div2-title fontFt">{ s }</span>
                                 )
                             )
                         })
@@ -114,9 +114,9 @@ function Search_conts({list, word, total, kind, option}) {
                                 str.map((s) => {
                                     return(
                                         s === word ? (
-                                            <span class = "div2-cont bold">{ s }</span>
+                                            <span class = "bold fontFt"  style={{color:'#333333'}}>{ s }</span>
                                         ) : (
-                                            <span class = "div2-cont">{ s }</span>
+                                            <span class = "fontFt" style={{color:'#555555'}}>{ s }</span>
                                         )
                                         
                                     )
